@@ -1,0 +1,1 @@
+WriteOutline←{1↓∊{'/',WriteStroke⍵}¨↓⍵}

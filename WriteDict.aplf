@@ -1,0 +1,1 @@
+WriteDict←{1⎕JSON⍠('Format' 'M')('Compact'0)⊢(0'' ''1)⍪4,⍨1,⍵}
