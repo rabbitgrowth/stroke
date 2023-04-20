@@ -1,6 +1,6 @@
 Steno←{
     (keys nums)←2↑⊂⍣(2=≡⍺)⊢⍺
-    num←(' '∨.≠∊nums)∧⍵⊃⍨'#'⍳⍨∊keys
+    num←(' '∨.≠∊nums)∧'#'∊⍵/∊keys
     banks←nums{⍺⍵⊃⍨1+' '=⍺}¨¨⍣num⊢keys
     parts←banks/⍨¨⍵⊂⍨∊(1↑⍨≢)¨banks
     (mid right)←×⍤≢¨1↓parts
