@@ -1,0 +1,4 @@
+Steno←{
+    (left mid right)←masks←⍵⊂⍨∊(1↑⍨≢)¨⍺
+    ∊'-'@2⍣(right∧∘~⍥(∨/)mid)⊢masks/¨⍺
+}

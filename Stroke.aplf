@@ -1,0 +1,13 @@
+Stroke←{
+    joined←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
+    (left mid)←≢⍤⍉¨¯1↓joined
+    (keys nums)←↓layout←⊃,/joined
+    indices←('-'≠⍵)/+\⊃{
+        drop←+/⍵
+        hyphen←1+'-'=⍺
+        index←hyphen⊃(⌊/⍺⍳⍤1⍨0 drop↓layout)(drop-⍨left+mid)
+        hyphen⊃(index>drop-⍨≢keys)(index<mid):⎕SIGNAL 11
+        ⍵,index
+    }/(⌽⍵),⊂⍬
+    (keys='#')∨⍣(∨/⍵∊' '~⍨∊nums)⊢(≢keys)↑⍸⍣¯1⊢indices
+}
