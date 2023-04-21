@@ -1,13 +1,12 @@
 Stroke←{
     joined←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
     (left mid)←≢⍤⍉¨¯1↓joined
-    (keys nums)←↓layout←⊃,/joined
+    (keys nums)←↓⊃,/joined
+    Error←{⎕SIGNAL 11}
     indices←('-'≠⍵)/+\⊃{
         drop←+/⍵
-        hyphen←1+'-'=⍺
-        index←hyphen⊃(⌊/⍺⍳⍤1⍨0 drop↓layout)(drop-⍨left+mid)
-        hyphen⊃(index>drop-⍨≢keys)(index<mid):⎕SIGNAL 11
-        ⍵,index
+        '-'=⍺:⍵,Error⍣(index<mid)        ⊢index←drop-⍨left+mid
+              ⍵,Error⍣(index>drop-⍨≢keys)⊢index←keys⌊⍥(⍺⍳⍨drop∘↓)nums
     }/(⌽⍵),⊂⍬
-    (keys='#')∨⍣(∨/⍵∊' '~⍨∊nums)⊢(≢keys)↑⍸⍣¯1⊢indices
+    ('#'=keys)∨⍣(∨/⍵∊nums)⊢(≢keys)↑⍸⍣¯1⊢indices
 }
