@@ -1,1 +1,1 @@
-Dict←{⍉¯1↓1↓⍉1↓⎕JSON⍠'Format' 'M'⊢⍵}
+Dict←{⍉¯1↓1↓⍉1↓⎕JSON⍠'M'⊢⍵}
