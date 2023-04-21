@@ -1,12 +1,13 @@
 Stroke←{
+    steno←⍵~' '
     banks←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
     (left mid)←(0⊥⍴)¨¯1↓banks
     (keys nums)←↓⊃,/banks
     Error←{⎕SIGNAL 11}
-    indices←('-'≠⍵)/+\⊃{
+    indices←('-'≠steno)/+\⊃{
         drop←+/⍵
         '-'=⍺:⍵,Error⍣(index<mid)        ⊢index←drop-⍨left+mid
               ⍵,Error⍣(index>drop-⍨≢keys)⊢index←keys⌊⍥(⍺⍳⍨drop∘↓)nums
-    }/(⌽⍵),⊂⍬
+    }/(⌽steno),⊂⍬
     ('#'=keys)∨⍣(∨/⍵∊nums)⊢(≢keys)↑⍸⍣¯1⊢indices
 }
