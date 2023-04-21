@@ -1,6 +1,6 @@
 Stroke←{
     joined←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
-    (left mid)←≢⍤⍉¨¯1↓joined
+    (left mid)←(0⊥⍴)¨¯1↓joined
     (keys nums)←↓⊃,/joined
     Error←{⎕SIGNAL 11}
     indices←('-'≠⍵)/+\⊃{
