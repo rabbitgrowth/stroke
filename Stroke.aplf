@@ -9,5 +9,5 @@ Stroke←{
         '-'=⍺:⍵,Error⍣(index<mid)        ⊢index←drop-⍨left+mid
               ⍵,Error⍣(index>drop-⍨≢keys)⊢index←keys⌊⍥(⍺⍳⍨drop∘↓)nums
     }/(⌽steno),⊂⍬
-    ('#'=keys)∨⍣(∨/⍵∊nums)⊢(≢keys)↑⍸⍣¯1⊢indices
+    ('#'=keys)∨⍣(∨/⍵∊nums)⊢indices∊⍨⍳≢keys
 }
