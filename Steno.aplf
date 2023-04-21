@@ -1,8 +1,8 @@
 Steno←{
-    (keys nums)←2↑⊂⍣(2=≡⍺)⊢⍺
-    num←(' '∨.≠∊nums)∧'#'∊⍵/∊keys
-    banks←nums{1⌷(' '=⍺)⊖↑⍺⍵}¨⍣num⊢keys
+    (letters numbers)←2↑⊂⍣(2=≡⍺)⊢⍺
+    numerical←(' '∨.≠∊numbers)∧'#'∊⍵/∊letters
+    banks←numbers{1⌷(' '=⍺)⊖↑⍺⍵}¨⍣numerical⊢letters
     parts←banks/⍨¨⍵⊂⍨∊(1↑⍨≢)¨banks
-    (mid right)←×⍤≢¨1↓parts
-    '#'~⍨⍣num⊢∊'-'@2⍣(right∧~mid)⊢parts
+    (middle right)←×⍤≢¨1↓parts
+    '#'~⍨⍣numerical⊢∊'-'@2⍣(right∧~middle)⊢parts
 }
