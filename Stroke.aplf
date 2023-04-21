@@ -1,7 +1,7 @@
 Stroke←{
-    joined←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
-    (left mid)←(0⊥⍴)¨¯1↓joined
-    (keys nums)←↓⊃,/joined
+    banks←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
+    (left mid)←(0⊥⍴)¨¯1↓banks
+    (keys nums)←↓⊃,/banks
     Error←{⎕SIGNAL 11}
     indices←('-'≠⍵)/+\⊃{
         drop←+/⍵
