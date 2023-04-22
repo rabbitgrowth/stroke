@@ -116,7 +116,7 @@ Finding outlines that can be stacked without violating steno order,
 but excluding cases where the last stroke is an inflected ending:
 
           endings     ← Stroke¨'-',¨'GSD'
-          Stackable   ← {∧/>/¯1↓1 0⊖(⊃,⊃⍤⌽)⍤⍸⍤1⊢⍵}
+          Stackable   ← {∧/>/¯1↓1 0⊖,⍥⊃∘⌽⍨⍤⍸⍤1⊢⍵}
           Uninflected ← {~endings∊⍨⊂⊢⌿⍵}
           dict⌿⍨(Uninflected∧Stackable∧1<≢)¨outlines
      AEUR/-BL  arable
