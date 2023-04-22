@@ -91,7 +91,7 @@ Finding the shortest unused right-hand chords:
           Steno¨{⍵[10↑⍋+/¨⍵]}unused
      -SDZ  -GTZ  -LSD  -BSD  -BTZ  -PSZ  -PTZ  -PGZ  -FTZ  -FGZ
 
-Finding visually symmetrical strokes with ten keys:
+Finding visually symmetrical strokes with more than ten keys:
 
           mask         ← Stroke'#-TDZ'
           firstStrokes ← ↑⊣⌿¨outlines
@@ -101,11 +101,13 @@ Finding visually symmetrical strokes with ten keys:
           right        ← coreKeys[;10+⍳9]
           mirror       ← right[;1 2 4 3 6 5 8 7 9]
           oneStroke    ← 1=≢¨outlines
-          tenKeys      ← 10=+/firstStrokes
+          manyKeys     ← 10≤+/firstStrokes
           noExtraKeys  ← ~∨/extraKeys
           symmetrical  ← left≡∘⌽⍤1⊢mirror
-          dict⌿⍨symmetrical∧noExtraKeys∧tenKeys∧oneStroke
-     KPWAOEUPBG   combining
-     STPAOEUPLS   sometimes
-     TKPWAUPBLG   gauge
-     TKPWR-RPBLG  grand juror
+          dict⌿⍨symmetrical∧noExtraKeys∧manyKeys∧oneStroke
+     KPWAOEUPBG     combining
+     STPAOEUPLS     sometimes
+     TKPWAUPBLG     gauge
+     TKPWHR*FRPBLG  grasshopper
+     TKPWR*RPBLG    Grand Juror
+     TKPWR-RPBLG    grand juror
