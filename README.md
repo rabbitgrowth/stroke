@@ -96,7 +96,8 @@ Finding visually symmetrical strokes with ten keys:
           firstStrokes ← ↑⊣⌿¨outlines
           extraKeys    ← mask/firstStrokes
           coreKeys     ← (~mask)/firstStrokes
-          (left right) ← ↑¨↓⍉(0@10⊢19⍴1)⊆coreKeys
+          left         ← coreKeys[;⍳9]
+          right        ← coreKeys[;10+⍳9]
           mirror       ← right[;1 2 4 3 6 5 8 7 9]
           oneStroke    ← 1=≢¨outlines
           tenKeys      ← 10=+/firstStrokes
