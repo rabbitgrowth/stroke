@@ -1,8 +1,9 @@
 Stroke←{
-    steno←⍵~' '
+    ⍺←english
     banks←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
     (left middle)←(0⊥⍴)¨¯1↓banks
     (letters numbers)←↓⊃,/banks
+    steno←⍵~' '
     Error←{⎕SIGNAL 11}
     indices←('-'≠steno)/+\⊃{
         drop←+/⍵

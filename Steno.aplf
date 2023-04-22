@@ -1,4 +1,5 @@
 Steno←{
+    ⍺←english
     (letters numbers)←2↑⊂⍣(2=≡⍺)⊢⍺
     numerical←(' '∨.≠∊numbers)∧'#'∊⍵/∊letters
     banks←numbers{1⌷(' '=⍺)⊖↑⍺⍵}¨⍣numerical⊢letters
