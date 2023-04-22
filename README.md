@@ -85,7 +85,7 @@ Finding entries with the fewest keys for the most characters:
 Finding the shortest unused right-hand chords:
 
           all←⍉(23⍴2)⊤1-⍨⍳2*10
-          used←∪0@(⍳13)⍤1⊢strokes
+          used←0@(⍳13)⍤1⊢strokes
           unused←all~⍥↓used
           Steno¨{⍵[10↑⍋+/¨⍵]}unused
      -SDZ  -GTZ  -LSD  -BSD  -BTZ  -PSZ  -PTZ  -PGZ  -FTZ  -FGZ
