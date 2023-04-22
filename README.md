@@ -53,7 +53,7 @@ Unlike raw steno, the boolean vectors can be combined easily.
 For example, to stack strokes, simply OR the boolean vectors:
 
           Stack←Steno∨⍥Stroke
-          'APB' Stack 'PHAL'
+          'APB'Stack'PHAL'
     PHAPBL
           ⊃Stack/'ST' 'HRAOU' '-S'
     STHRAOUS
