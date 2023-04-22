@@ -75,7 +75,7 @@ Finding the frequency of each key by percentage:
 
 Finding entries with the fewest keys for the most characters:
 
-          dict[5↑⍒(≢¨vals)÷+/⍤∊¨outlines;]
+          dict[5↑⍒(≢¨vals)÷+/⍣2¨outlines;]
      T*TD   terminal deoxynucleotidyl transferase
      TKH*F  acute decompensated heart failure
      P-B    peanut butter
