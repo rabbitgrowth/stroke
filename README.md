@@ -2,7 +2,7 @@
 
 A pair of functions for converting between steno strokes and boolean vectors.
 
-## Synopsis
+## Summary
 
     stroke ← [letters [numbers]] Stroke steno
     steno  ← [letters [numbers]] Steno  stroke
@@ -15,12 +15,13 @@ You can optionally specify numbers as a vector with the same structure where spa
           letters←'#STKPWHR' 'AO*EU' 'FRPBLGTSDZ'
           numbers←' 12 3 4 ' '50   ' '6 7 8 9   ' ⍝ optional
 
-Use `Stroke` to convert raw steno into a boolean vector where `0` indicates an unpressed key and `1` indicates a pressed key, in steno order.
+Use `Stroke` to convert raw steno into a boolean vector
+where `0` indicates an unpressed key and `1` indicates a pressed key, arranged in steno order.
 The left argument is the steno layout, which can be
 
 - omitted, in which case the default English layout is used;
-- specified as `letters`, in which case that will be used as the layout;
-- specified as `letters numbers`, in which case numbers will be parsed as well.
+- given as `letters`, in which case that will be used as the layout;
+- given as `letters numbers`, in which case numbers will be parsed as well.
 
 <!-- dummy comment to force the code block to render properly -->
 
@@ -37,7 +38,7 @@ Invalid strokes give `DOMAIN ERROR`:
     DOMAIN ERROR
 
 In the other direction, use `Steno` to convert a boolean vector into raw steno.
-The left argument is the same as in `Stroke`, and the right argument is the boolean vector.
+It takes the same left arguments as `Stroke`.
 
           Steno 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
     STROEBG
@@ -60,7 +61,7 @@ For example, to stack strokes, simply OR the boolean vectors:
      TH-BG  TH-BGD
      THABG  THABGD
 
-Here are some more example applications.
+## Examples
 
 Parsing `main.json`:
 
