@@ -111,3 +111,15 @@ Finding visually symmetrical strokes with more than ten keys:
      TKPWHR*FRPBLG  grasshopper
      TKPWR*RPBLG    Grand Juror
      TKPWR-RPBLG    grand juror
+
+Finding outlines that can be stacked without violating steno order,
+but excluding cases where the last stroke is an inflected ending:
+
+          endings←Stroke¨'-',¨'GSD'
+          dict⌿⍨((~endings∊⍨∘⊂⊢⌿)∧(∧/2>⍥⊃∘⌽⍨/⍸¨⍤↓)∧1<≢)¨outlines
+     AEUR/-BL  arable
+     AEUR/-LS  airless
+     AF/-BL    affable
+     AF/-BLT   affability
+     AFRP/-L   ample
+     ...
