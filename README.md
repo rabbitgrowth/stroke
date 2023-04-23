@@ -76,22 +76,23 @@ Finding the frequency of each key by percentage:
 
 Finding entries with the fewest keys for the most characters:
 
-          dict[5↑⍒(≢¨vals)÷+/⍣2¨outlines;]
+          dict[⍒(≢¨vals)÷+/⍣2¨outlines;]
      T*TD   terminal deoxynucleotidyl transferase
      TKH*F  acute decompensated heart failure
      P-B    peanut butter
      S-D    second-degree
      R*F    reticular formation
+     ...
 
 Finding the shortest unused right-hand chords:
 
           all    ← ⍉(23⍴2)⊤1-⍨⍳2*10
           used   ← 0@(⍳13)⍤1⊢strokes
           unused ← all~⍥↓used
-          Steno¨{⍵[10↑⍋+/¨⍵]}unused
-     -SDZ  -GTZ  -LSD  -BSD  -BTZ  -PSZ  -PTZ  -PGZ  -FTZ  -FGZ
+          Steno¨{⍵[⍋+/¨⍵]}unused
+     -SDZ  -GTZ  -LSD  -BSD  -BTZ  -PSZ  -PTZ  -PGZ  ...
 
-Finding visually symmetrical strokes with more than ten keys:
+Finding visually symmetrical strokes:
 
           mask         ← Stroke'#-TDZ'
           firstStrokes ← ↑⊣⌿¨outlines
@@ -101,16 +102,16 @@ Finding visually symmetrical strokes with more than ten keys:
           right        ← coreKeys[;10+⍳9]
           mirror       ← right[;1 2 4 3 6 5 8 7 9]
           oneStroke    ← 1=≢¨outlines
-          manyKeys     ← 10≤+/firstStrokes
           noExtraKeys  ← ~∨/extraKeys
           symmetrical  ← left≡∘⌽⍤1⊢mirror
-          dict⌿⍨symmetrical∧noExtraKeys∧manyKeys∧oneStroke
-     KPWAOEUPBG     combining
-     STPAOEUPLS     sometimes
-     TKPWAUPBLG     gauge
-     TKPWHR*FRPBLG  grasshopper
-     TKPWR*RPBLG    Grand Juror
-     TKPWR-RPBLG    grand juror
+          dict⌿⍨symmetrical∧noExtraKeys∧oneStroke
+     ...
+     STAO*EULS   stylus
+     STAOEULS    styles
+     STAULS      stalls
+     STP*PLS     symptoms
+     STPAOEUPLS  sometimes
+     ...
 
 Finding outlines that can be stacked without violating steno order,
 but excluding cases where the last stroke is an inflected ending:
@@ -119,6 +120,7 @@ but excluding cases where the last stroke is an inflected ending:
           Stackable   ← {∧/</¯1↓0 1⊖(⊢/,⊣/)⍤⍸⍤1⊢⍵}
           Uninflected ← {~endings∊⍨⊂⊢⌿⍵}
           dict⌿⍨(Uninflected∧Stackable∧1<≢)¨outlines
+     ...
      AEUR/-BL  arable
      AEUR/-LS  airless
      AF/-BL    affable
