@@ -1,4 +1,4 @@
-Steno←{
+Serialize←{
     ⍺←english
     (letters numbers)←2↑⊂⍣(2=≡⍺)⊢⍺
     numerical←(' '∨.≠∊numbers)∧'#'∊⍵/∊letters

@@ -1,4 +1,4 @@
-Stroke←{
+Parse←{
     ⍺←english
     banks←,[0.5]⌿↑2↑⊂⍣(2=≡⍺)⊢⍺
     (left middle)←(0⊥⍴)¨¯1↓banks
