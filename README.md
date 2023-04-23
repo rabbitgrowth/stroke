@@ -4,69 +4,70 @@ A pair of functions for converting between steno strokes and boolean vectors.
 
 ## Summary
 
-    stroke ← [letters [numbers]] Stroke steno
-    steno  ← [letters [numbers]] Steno  stroke
+    booleanVector ← [letters [numbers]] Parse     rawSteno
+    rawSteno      ← [letters [numbers]] Serialize booleanVector
 
 ## Usage
 
-The steno layout is specified as a vector of left-, middle-, and right-bank keys.
-You can optionally specify numbers as a vector with the same structure where spaces indicate the absence of numbers.
+Use `Parse` to convert raw steno representing a stroke into a boolean vector
+with a `0` (unpressed) or `1` (pressed) for each key in the layout:
 
-          letters←'#STKPWHR' 'AO*EU' 'FRPBLGTSDZ'
-          numbers←' 12 3 4 ' '50   ' '6 7 8 9   ' ⍝ optional
-
-Use `Stroke` to convert raw steno into a boolean vector
-where `0` indicates an unpressed key and `1` indicates a pressed key, arranged in steno order.
-The left argument is the steno layout, which can be
-
-- omitted, in which case the default English layout is used;
-- given as `letters`, in which case that will be used as the layout;
-- given as `letters numbers`, in which case numbers will be parsed as well.
-
-<!-- dummy comment to force the code block to render properly -->
-
-          Stroke 'STROEBG'
+          Parse 'STROEBG'
     0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
-          letters Stroke 'STROEBG'
-    0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
-          letters numbers Stroke '134*EU9'
-    1 1 0 0 1 0 1 0 0 0 1 1 1 0 0 0 0 0 0 1 0 0 0
 
 Invalid strokes give `DOMAIN ERROR`:
 
-          letters Stroke 'STROKE'
+          Parse 'STROKE'
     DOMAIN ERROR
 
-In the other direction, use `Steno` to convert a boolean vector into raw steno.
-It takes the same left arguments as `Stroke`.
+By default the standard English layout is used.
+To use a specific layout,
+provide a vector of left-, middle-, and right-bank keys as the left argument:
 
-          Steno 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
+          letters←'#STKPWHR' 'AO*EU' 'FRPBLGTSDZ'
+          letters Parse 'STROEBG'
+    0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
+
+You could optionally also specify numbers as a vector with the same structure as the letters,
+with spaces indicating the absence of numbers:
+
+          numbers←' 12 3 4 ' '50   ' '6 7 8 9   ' ⍝ optional
+          letters↑⍤,⍥⊂numbers
+     #STKPWHR  AO*EU  FRPBLGTSDZ
+      12 3 4   50     6 7 8 9
+          letters numbers Parse '123450'
+    1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+In the other direction, use `Serialize` to convert a boolean vector into raw steno.
+It takes the same left arguments as `Parse`.
+
+          Serialize 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
     STROEBG
-          letters Steno 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
+          letters Serialize 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
     STROEBG
-          letters Steno 1 1 0 0 1 0 1 0 0 0 1 1 1 0 0 0 0 0 0 1 0 0 0
-    #SPH*EUT
-          letters numbers Steno 1 1 0 0 1 0 1 0 0 0 1 1 1 0 0 0 0 0 0 1 0 0 0
-    134*EU9
+          letters Serialize 1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+    #STPHAO
+          letters numbers Serialize 1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+    123450
 
 Unlike raw steno, the boolean vectors can be combined easily.
 For example, to stack strokes, simply OR the boolean vectors:
 
-          Stack←Steno∨⍥Stroke
-          'APB'Stack'PHAL'
+          Stack←Serialize∨⍥Parse
+          'APB' Stack 'PHAL'
     PHAPBL
           ⊃Stack/'ST' 'HRAOU' '-S'
     STHRAOUS
-          'TH' 'THA'∘.Stack'-BG' '-BGD'
-     TH-BG  TH-BGD
-     THABG  THABGD
+          'TH' 'THA'∘.Stack'-S' '-FS'
+     TH-S  TH-FS
+     THAS  THAFS
 
 ## Examples
 
 Parsing `main.json`:
 
           (keys vals)←↓⍉dict←0 1 1 0/1↓⎕JSON⍠'M'⊃⎕NGET'main.json'
-          strokes←⊃⍪/outlines←{↑Stroke¨'/'(≠⊆⊢)⍵}¨keys
+          strokes←⊃⍪/outlines←{↑Parse¨'/'(≠⊆⊢)⍵}¨keys
 
 Finding the frequency of each key by percentage:
 
@@ -89,12 +90,12 @@ Finding the shortest unused right-hand chords:
           all    ← ⍉(23⍴2)⊤1-⍨⍳2*10
           used   ← 0@(⍳13)⍤1⊢strokes
           unused ← all~⍥↓used
-          Steno¨{⍵[⍋+/¨⍵]}unused
+          Serialize¨{⍵[⍋+/¨⍵]}unused
      -SDZ  -GTZ  -LSD  -BSD  -BTZ  -PSZ  -PTZ  -PGZ  ...
 
 Finding visually symmetrical strokes:
 
-          mask         ← Stroke'#-TDZ'
+          mask         ← Parse'#-TDZ'
           firstStrokes ← ↑⊣⌿¨outlines
           extraKeys    ← mask/firstStrokes
           coreKeys     ← (~mask)/firstStrokes
@@ -116,7 +117,7 @@ Finding visually symmetrical strokes:
 Finding outlines that can be stacked without violating steno order,
 but excluding cases where the last stroke is an inflected ending:
 
-          endings     ← Stroke¨'-',¨'GSD'
+          endings     ← Parse¨'-',¨'GSD'
           Stackable   ← {∧/</¯1↓0 1⊖(⊢/,⊣/)⍤⍸⍤1⊢⍵}
           Uninflected ← {~endings∊⍨⊂⊢⌿⍵}
           dict⌿⍨(Uninflected∧Stackable∧1<≢)¨outlines
