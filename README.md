@@ -114,7 +114,7 @@ Finding visually symmetrical strokes:
      STPAOEUPLS  sometimes
      ...
 
-Finding outlines that can be stacked without violating steno order,
+Finding outlines where strokes can be stacked without violating steno order,
 but excluding cases where the last stroke is an inflected ending:
 
           endings     ← Parse¨'-',¨'GSD'
