@@ -1,15 +1,15 @@
 # stroke
 
-A pair of functions for converting between steno strokes and boolean vectors.
+A pair of functions for converting between steno stroke strings and boolean vectors.
 
 ## Summary
 
-    booleanVector ← [letters [numbers]] Parse     rawSteno
-    rawSteno      ← [letters [numbers]] Serialize booleanVector
+    booleanVector ← [letters [numbers]] Parse     strokeString
+    strokeString  ← [letters [numbers]] Serialize booleanVector
 
 ## Usage
 
-Use `Parse` to convert raw steno representing a stroke into a boolean vector
+Use `Parse` to convert a stroke string into a boolean vector
 with a `0` (unpressed) or `1` (pressed) for each key in the layout:
 
           Parse 'STROEBG'
@@ -38,7 +38,7 @@ with spaces indicating the absence of numbers:
           letters numbers Parse '123450'
     1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
 
-In the other direction, use `Serialize` to convert a boolean vector into raw steno.
+In the other direction, use `Serialize` to convert a boolean vector into a stroke string.
 It takes the same left arguments as `Parse`.
 
           Serialize 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0
@@ -50,7 +50,7 @@ It takes the same left arguments as `Parse`.
           letters numbers Serialize 1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
     123450
 
-Unlike raw steno, the boolean vectors can be combined easily.
+Unlike stroke strings, the boolean vectors can be combined easily.
 For example, to stack strokes, simply OR the boolean vectors:
 
           Stack←Serialize∨⍥Parse
